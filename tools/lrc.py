@@ -22,7 +22,7 @@ class LRC():
         y = np.array(y)
         unique = np.unique(y)
         assert len(unique == 2)
-        assert 1 in unique or -1 in unique
+        #assert 1 in unique or -1 in unique
         assert len(X) == len(y)
 
     def multiple_update(self, X, y, K, T):
@@ -156,7 +156,10 @@ class LRC():
         d = X.shape[1]
         if self.coef_ is None:
             self.coef_ = np.zeros(d) #np.random.normal(0, 1, d)
-
+        print(self.coef_)
+        print(X)
+        for i in range(len(self.coef_)):
+            self.coef_[i] = self.coef_[i].reshape(-1).mean()
         scores = X.dot(self.coef_)
         return scores
 

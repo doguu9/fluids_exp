@@ -71,7 +71,7 @@ class Learner():
             
         return self.est.score(self.X, self.y)
 
-    def intended_action(self, s):
+    def intended_action(self, s, _=None):
         if self.one_class_error is not None:
             return self.one_class_error
         try:
@@ -79,7 +79,7 @@ class Learner():
         except NotFittedError:
             return np.random.choice([0, 1])
 
-    def sample_action(self, s):
+    def sample_action(self, s, _=None):
         return self.intended_action(s)
 
 
@@ -92,12 +92,9 @@ class Learner():
 
 class FluidsLearner(Learner):
 
-    def intended_action(self, s, _):
-        return Learner.sample_action(self, s)
+#    def intended_action(self, s, _=None):
+#        return Learner.sample_action(self, s)
 
-    def sample_action(self, s, _):
-        return Learner.sample_action(self, s)
-
-
-
+    def sample_action(self, s, _=None):
+        return Learner.intended_action(self, s)
 
