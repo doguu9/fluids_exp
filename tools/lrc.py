@@ -170,7 +170,7 @@ class LRC():
             for lst in x_comp:
                 if len(lst) > elem:
                     sum += lst[elem]
-            sum = sum / len(x_comp)
+            sum = sum / len(self.coef_)
             final.append(sum)
         x_comp = [final]
         x_comp = np.array(x_comp)
