@@ -39,8 +39,8 @@ reward_arr = []
 for iteration in range(iterations):
     states, intended_actions, taken_actions, reward, infos = statistics.collect_traj(env, sup, 10, True)
     sup_reward_arr.append(reward)
-    #states, intended_actions, taken_actions, reward, infos = statistics.collect_traj(env, lnr, 10, True)
-    #reward_arr.append(reward)
+    states, intended_actions, taken_actions, reward, infos = statistics.collect_traj(env, lnr, 10, True)
+    reward_arr.append(reward)
     i_actions = []
     for i in range(len(states)):
         i_actions += [sup.intended_action(states[i], infos[i])]
@@ -54,7 +54,7 @@ for iteration in range(iterations):
 
 plt.subplot(111)
 plt.title("Rewards")
-#plt.plot(reward_arr, label='Learner rewards')
+plt.plot(reward_arr, label='Learner rewards')
 plt.plot(sup_reward_arr, label='Supervisor Rewards')
 plt.legend()
 plt.ylim(0, 20)

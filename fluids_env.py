@@ -46,6 +46,7 @@ class FluidsEnv():
         return obs[car_keys[0]].get_array()
 
     def fluids_action_maker(self, action):
+        print(action)
         return fluids.VelocityAction(action[0])
 
 

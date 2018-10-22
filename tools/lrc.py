@@ -148,6 +148,7 @@ class LRC():
         return self._loss(X, y, w=w)
         
     def decision_function(self, X):
+        print('hello')
         X = np.array(X)
         X_original = X.copy()
         
@@ -156,11 +157,28 @@ class LRC():
         d = X.shape[1]
         if self.coef_ is None:
             self.coef_ = np.zeros(d) #np.random.normal(0, 1, d)
-        print(self.coef_)
-        print(X)
+
+        #compress observations to match coef_
+        x_comp = []
+        for i in X:
+            for j in i:
+                for k in j:
+                    x_comp.append(k)
+        final = []
+        for elem in range(len(self.coef_)):
+            sum = 0
+            for lst in x_comp:
+                if len(lst) > elem:
+                    sum += lst[elem]
+            sum = sum / len(x_comp)
+            final.append(sum)
+        x_comp = [final]
+        x_comp = np.array(x_comp)
+        print(x_comp)
+
         for i in range(len(self.coef_)):
             self.coef_[i] = self.coef_[i].reshape(-1).mean()
-        scores = X.dot(self.coef_)
+        scores = x_comp.dot(self.coef_)
         return scores
 
 
